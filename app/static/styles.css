@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+.navbar .links a,
+.navbar .auth a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.content {
+    padding: 20px;
+}
+
+.article {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}

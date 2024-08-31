@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Flask
+instance/
+.webassets-cache
+
+# Celery
+celerybeat-schedule.db
+
+# Database
+*.sqlite3
+*.db
+dump.rdb
+
+# Security
+key.pem
+cert.pem
+.env
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.DS_Store
+
+# Logs
+*.log
+
+# Configuration
+*.ini
+*.json
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Testing
+.coverage
+.coverage.*
+nosetests.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Project Files
+pyproject.toml

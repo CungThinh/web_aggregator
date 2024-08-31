@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">News</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('main.home') }}">All News</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="{{ url_for('main.home', category='programming') }}"
+              >Programming</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="{{ url_for('main.home', category='self-improvement') }}"
+              >Self Improvement</a
+            >
+          </li>
+        </ul>
+
+        <!-- Search form -->
+        <form
+          class="form-inline my-2 my-lg-0 mx-auto"
+          method="GET"
+          action="{{ url_for('main.search') }}"
+        >
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            name="q"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+
+        <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
+          <li>
+            <a
+              class="nav-link"
+              href="{{ url_for('main.view_reading_history') }}"
+              >Reading History</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{ current_user.username }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('main.login') }}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mt-4">
+      <h1 class="mb-4">Search Results for "{{ query }}"</h1>
+      <div class="row">
+        {% if articles %} {% for article in articles %}
+        <div class="col-md-3 mb-4">
+          <div class="card h-100">
+            <img
+              class="card-img-top"
+              src="{{ article.image }}"
+              alt="Article Image"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ article.title }}</h5>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Author: {{ article.author }}</small
+              ><br />
+              <small class="text-muted">Category: {{ article.category }}</small
+              ><br />
+              <a
+                href="{{ article.url }}"
+                class="btn btn-primary btn-sm mt-2"
+                onclick="addToReadingHistory({{ article.id }})"
+                >Read more</a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %} {% else %}
+        <p>No results found for your query.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
